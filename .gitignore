@@ -2,4 +2,6 @@
 */CMakeCache.txt
 *.cmake
 */build/*
-build*/*
+build-29_4_fg_queue-Desktop-Debug/*
+build-29.4_mtds-Desktop-Debug/*
+
