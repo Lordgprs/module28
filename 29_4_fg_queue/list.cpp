@@ -11,8 +11,8 @@ void List::remove(int value) {
   if (!_head) {
     return;
   }
-  prev = this->_head;
-  cur = this->_head->_next;
+  prev = _head;
+  cur = _head->_next;
 
   prev->_mtx.lock();
   if (prev->_data == value) {

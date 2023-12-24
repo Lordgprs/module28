@@ -4,4 +4,5 @@
 */build/*
 build-29_4_fg_queue-Desktop-Debug/*
 build-29.4_mtds-Desktop-Debug/*
-
+build-30_2_thread_pool-Desktop-Debug/*
+build-30_3_work_stealing-Desktop-Debug/*
