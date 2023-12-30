@@ -8,3 +8,4 @@ build-30_2_thread_pool-Desktop-Debug/*
 build-30_3_work_stealing-Desktop-Debug/*
 build-30_4_thread_local-Desktop-Debug/*
 build-30_5_packaged_task-Desktop-Debug/*
+build-30_5_2_promise-Desktop-Debug/*
