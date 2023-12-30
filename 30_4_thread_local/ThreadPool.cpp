@@ -8,7 +8,7 @@ ThreadPool::ThreadPool()
 
 void ThreadPool::start() {
   for (int i = 0; i < _thread_count; ++i) {
-    _threads.emplace_back(&ThreadPool::threadFunc, this, i);
+    _threads.push_back(new InterruptableThread(this, i));
   }
 }
 
@@ -17,8 +17,8 @@ void ThreadPool::stop() {
     task_type empty_task;
     _thread_queues[i].push(empty_task);
   }
-  for (auto &thread : _threads) {
-    thread.join();
+  for (auto thread : _threads) {
+    delete thread;
   }
 }
 
@@ -30,6 +30,10 @@ void ThreadPool::pushTask(FuncType f, int id, int arg) {
 
 void ThreadPool::threadFunc(int qindex) {
   while (true) {
+    if (InterruptableThread::checkInterrupted()) {
+      std::cout << "thread was interrupted" << std::endl;
+      return;
+    }
     task_type task_to_do;
     bool res{false};
     int i{0};
@@ -44,9 +48,20 @@ void ThreadPool::threadFunc(int qindex) {
     } else if (!task_to_do) {
       _thread_queues[(qindex + 1) % _thread_count].push(task_to_do);
     }
+
+    if (InterruptableThread::checkInterrupted()) {
+      std::cout << "thread was interrupted" << std::endl;
+      return;
+    }
     if (!task_to_do) {
       return;
     }
     task_to_do();
+  }
+}
+
+void ThreadPool::interrupt() {
+  for (auto &t : _threads) {
+    t->interrupt();
   }
 }

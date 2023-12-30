@@ -1,12 +1,12 @@
 #pragma once
-
 #include <condition_variable>
 #include <mutex>
 #include <queue>
 
 template <class T> class BlockedQueue {
 public:
-  void push(T &item);
+  BlockedQueue() = default;
+  void push(const T &item);
   void pop(T &item);
   bool fast_pop(T &item);
 
@@ -16,7 +16,7 @@ private:
   std::condition_variable _notifier;
 };
 
-template <class T> void BlockedQueue<T>::push(T &item) {
+template <class T> void BlockedQueue<T>::push(const T &item) {
   std::lock_guard<std::mutex> lg{_mtx};
   _task_queue.push(item);
   _notifier.notify_one();

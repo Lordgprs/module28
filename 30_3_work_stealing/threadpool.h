@@ -1,7 +1,11 @@
 #pragma once
+
 #include "BlockedQueue.h"
+#include <condition_variable>
 #include <functional>
+#include <iostream>
 #include <mutex>
+#include <queue>
 #include <thread>
 #include <vector>
 
@@ -13,11 +17,11 @@ public:
   ThreadPool();
   void start();
   void stop();
-  void pushTask(FuncType f, int id, int arg);
+  void push_task(FuncType f, int id, int arg);
   void threadFunc(int qindex);
 
 private:
-  unsigned _thread_count;
+  unsigned int _thread_count;
   std::vector<std::thread> _threads;
   std::vector<BlockedQueue<task_type>> _thread_queues;
   int _index;

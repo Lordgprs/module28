@@ -1,11 +1,11 @@
 cmake_minimum_required(VERSION 3.5)
 
-project(30_3_work_stealing LANGUAGES CXX)
+project(30_5_packaged_task LANGUAGES CXX)
 
-set(CMAKE_CXX_STANDARD 11)
+set(CMAKE_CXX_STANDARD 14)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-add_executable(30_3_work_stealing main.cpp
+add_executable(30_5_packaged_task main.cpp
   threadpool.h
   threadpool.cpp
   requesthandler.h
@@ -13,5 +13,7 @@ add_executable(30_3_work_stealing main.cpp
   BlockedQueue.h
 )
 
-install(TARGETS 30_3_work_stealing
+target_link_libraries(30_5_packaged_task -lpthread)
+
+install(TARGETS 30_5_packaged_task
     LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR})

@@ -14,9 +14,13 @@ void taskFunc(int id, int delay) {
 int main() {
   srand(static_cast<unsigned>(time(nullptr)));
   RequestHandler rh;
+  std::vector<res_type> results;
 
-  for (int i = 1; i <= 20; ++i) {
-    rh.pushRequest(taskFunc, i, 1 + rand() % 9);
+  for (int i = 0; i < 20; ++i) {
+    results.push_back(rh.pushRequest(taskFunc, i, 1 + rand() % 9));
+  }
+  for (auto &result : results) {
+    result.wait();
   }
 
   return EXIT_SUCCESS;

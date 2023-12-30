@@ -6,11 +6,10 @@ set(CMAKE_CXX_STANDARD 11)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 add_executable(30_3_work_stealing main.cpp
-  threadpool.h
-  threadpool.cpp
-  requesthandler.h
-  requesthandler.cpp
-  BlockedQueue.h
+BlockedQueue.h BlockedQueue.cpp
+ThreadPool.cpp ThreadPool.h
+RequestHandler.h RequestHandler.cpp
+InterruptableThread.h InterruptableThread.cpp
 )
 
 install(TARGETS 30_3_work_stealing
